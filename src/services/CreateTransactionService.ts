@@ -1,5 +1,5 @@
 // import AppError from '../errors/AppError';
-import { getRepository } from 'typeorm';
+import { getCustomRepository } from 'typeorm';
 import TransactionsRepository from '../repositories/TransactionsRepository';
 import Transaction from '../models/Transaction';
 
@@ -17,7 +17,7 @@ class CreateTransactionService {
     type,
     category,
   }: Request): Promise<Transaction> {
-    const transactionsRepository = getRepository(Transaction);
+    const transactionsRepository = getCustomRepository(TransactionsRepository);
 
     /**
     const checkCategoryExists = await transactionsRepository.findOne9{
@@ -32,7 +32,6 @@ class CreateTransactionService {
       title,
       value,
       type,
-      category,
     });
 
     await transactionsRepository.save(transaction);

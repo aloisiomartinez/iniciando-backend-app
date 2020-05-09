@@ -1,11 +1,11 @@
 import {
   Entity,
-  Column,
   PrimaryGeneratedColumn,
-  ManyToOne,
-  JoinColumn,
+  Column,
   CreateDateColumn,
   UpdateDateColumn,
+  ManyToOne,
+  JoinColumn,
 } from 'typeorm';
 
 import Category from './Category';
@@ -18,15 +18,18 @@ class Transaction {
   @Column()
   title: string;
 
-  @Column()
+  @Column('enum')
   type: 'income' | 'outcome';
 
-  @Column('decimal')
+  @Column('float')
   value: number;
+
+  @Column('uuid')
+  category_id: string;
 
   @ManyToOne(() => Category)
   @JoinColumn({ name: 'category_id' })
-  category_id: string;
+  provider: Category;
 
   @CreateDateColumn()
   created_at: Date;
